@@ -22,4 +22,4 @@ pswd = hashlib.md5(pswd).hexdigest()
 
 # command to copy the output string to your clipboard
 pyperclip.copy(pswd[:19] + secondInputChar)
-print bcolors.OKGREEN + "Copied to clipboard" + bcolors.ENDC
+print bcolors.OKGREEN + "Copied to clipboard!" + bcolors.ENDC
