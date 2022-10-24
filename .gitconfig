@@ -1,0 +1,64 @@
+# Workday Gerrit Template for /Users/ludim.castillo/.gitconfig file.
+
+[user]
+	name = ludim.castillo
+	email = ludim.castillo@workday.com
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[alias]
+	review = "!f() { \t  if [ -z $1 ]; then \t    echo \"Usage: git review <branch> <topic>\"; \t  else \t    if [ -z $2 ]; then \t      git push origin HEAD:refs/for/$1; \t    else \t      git push origin HEAD:refs/for/$1/$2; \t    fi; \t  fi; \t}; \tf"
+    	sync = "!f() { \t  echo \"Syncing master branch\" ; \t  git pull --rebase origin master; \t}; \tf"
+
+	presvnci = !git rebase -i `git rev-list -n1 --grep=git-svn-id HEAD`
+	prep = !git rebase -i HEAD~`git rev-list --count HEAD ^master`
+	setup = !git push -u origin HEAD
+	pop = !git reset HEAD~1
+
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+
+	ls = log --graph --full-history --all --color --pretty=format:%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s
+[color]
+	ui = auto
+	branch = auto
+	diff = auto
+	status = auto
+[color "branch"]
+       current = yellow reverse
+       local = yellow
+       remote = green
+[color "diff"]
+       meta = yellow bold
+       frag = magenta bold
+       old = red bold
+       new = green bold
+[color "status"]
+       added = yellow
+       changed = green
+       untracked = cyan
+[merge]
+	tool = opendiff
+[core]
+	excludesfile = /Users/ludim.castillo/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[include]
+	path = /Users/ludim.castillo/bin/_stools_manage_repository/git/shared_gitconfig
+[filesystem "Azul Systems, Inc.|1.8.0_131|/dev/disk1s1"]
+	timestampResolution = 1001 milliseconds
+	minRacyThreshold = 0 nanoseconds
+[filesystem "Azul Systems, Inc.|1.8.0_131|/dev/disk1s5"]
+	timestampResolution = 1001 milliseconds
+	minRacyThreshold = 0 nanoseconds
+[pull]
+	rebase = true
+[filesystem "Azul Systems, Inc.|1.8.0_131|/dev/disk1s5s1"]
+	timestampResolution = 1001 milliseconds
+	minRacyThreshold = 0 nanoseconds

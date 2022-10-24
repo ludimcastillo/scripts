@@ -14,14 +14,14 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 pswd = getpass.getpass("Password: ")
+secondInputChar = pswd[1].upper()
 lastInputChar = pswd[8]
 
 pswd = hashlib.md5(pswd).hexdigest()
-secondHashCharCap = pswd[1].upper()
 
 #print pswd[0] + secondHashCharCap + pswd[2:19] + lastInputChar
 
 # command to copy the output string to your clipboard
 process = subprocess.Popen('pbcopy', env={'LANG': 'en_US.UTF-8'}, stdin=subprocess.PIPE)
-process.communicate(pswd[0].title() + secondHashCharCap + pswd[2:19] + lastInputChar)
+process.communicate(pswd[0] + secondInputChar + pswd[2:19] + lastInputChar)
 print bcolors.OKGREEN + "Copied to clipboard" + bcolors.ENDC
