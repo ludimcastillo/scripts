@@ -1,6 +1,7 @@
 import hashlib
 import sys
 import getpass
+import subprocess
 
 class bcolors:
     HEADER = '\033[95m'
@@ -21,5 +22,6 @@ secondHashCharCap = pswd[1].upper()
 #print pswd[0] + secondHashCharCap + pswd[2:19] + lastInputChar
 
 # command to copy the output string to your clipboard
-pyperclip.copy(pswd[0] + secondHashCharCap + pswd[2:19] + lastInputChar)
+process = subprocess.Popen('pbcopy', env={'LANG': 'en_US.UTF-8'}, stdin=subprocess.PIPE)
+process.communicate(pswd[0].title() + secondHashCharCap + pswd[2:19] + lastInputChar)
 print bcolors.OKGREEN + "Copied to clipboard" + bcolors.ENDC
